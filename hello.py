@@ -1,0 +1,2 @@
+msg = 'qianxin'
+print(msg)
