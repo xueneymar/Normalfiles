@@ -308,6 +308,7 @@ def run(playwright):
     page.fill("//td[normalize-space(.)='   *']/span/input[1][normalize-space(@type)='text']", "policy_auto")
 
     try:
+    #6.2.150之前的版本
         page.click('text="请选择组"')
         page.waitForTimeout(10000)
         page.click("//div[normalize-space(.)='默认组']/span[3]")
@@ -320,6 +321,7 @@ def run(playwright):
         
         page.click("text=\"保存\"")
     except:
+    #6.2.150版本
         # Double click text="group_auto(默认站点)"
         page.dblclick("text=\"group_auto(默认站点)\"")
 
