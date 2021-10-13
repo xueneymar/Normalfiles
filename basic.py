@@ -3,23 +3,7 @@ import os
 
 
 #定义vpn地址   
-inputa = open(os.getcwd() + '\\vpnip.txt','r')
-vpnip = inputa.readline()
-vpnip = vpnip.strip('\n')
-
-inputb = open(os.getcwd() + '\devicelist.txt','r')
-lines = inputb.readlines()
-
-datagroup = []
-for line in lines:
-    line = line.strip('\n')
-    data = line.split(':')
-    datagroup.append(data)
-
-for i in range(len(datagroup)):
-    if datagroup[i][0] == vpnip.split(':')[0]:
-        networkport = datagroup[i][1]
-        innerip = datagroup[i][2]
+vpnip = '10.92.2.233:4430'
 #print(type(networkport),type(innerip))
 
 def run(playwright):
@@ -357,66 +341,6 @@ def run(playwright):
     page.click("text=\"保存\"")
 
     page.click("text=\"系统设置\"")
-
-    # Click text="网络接口"
-    # page.click("text=\"网络接口\"")
-    # assert page.url == "https://" + vpnip + "/admin/main.php?mid=2&p=2"
-    page.goto("https://" + vpnip + "/admin/main.php?mid=2&p=2")
-
-    # page.waitForTimeout(60000);
-
-    #页面元素不可见时，等待其可见后再操作
-    page.waitForSelector('text = %s' % networkport)
-
-    # Click text="GE3"
-    page.click('text = %s' % networkport)
-
-    # Click input[name="ip4_0"]
-    page.click("input[name=\"ip4_0\"]")
-
-    # Fill input[name="ip4_0"]
-    page.fill("input[name=\"ip4_0\"]", innerip)
-
-    # Click input[name="mask4_0"]
-    page.click("input[name=\"mask4_0\"]")
-
-    # Fill input[name="mask4_0"]
-    page.fill("input[name=\"mask4_0\"]", "255.255.255.0")
-
-    # Click button[id="ip_save_button"] >> text="保存"
-    page.click("button[id=\"ip_save_button\"] >> text=\"保存\"")
-
-    # Click //div[normalize-space(.)='编辑网络接口  ']/div[2]/a
-    page.click("//div[normalize-space(.)='编辑网络接口  ']/div[2]/a")
-
-    # Click text="NAT管理"
-    # page.click("text=\"NAT管理\"")
-    # assert page.url == "https://" + vpnip + "/admin/main.php?mid=2&p=4"
-    page.goto("https://" + vpnip + "/admin/main.php?mid=2&p=4")
-
-    # Click input[name="snat_1"]
-    page.click("input[name=\"snat_1\"]")
-
-    # Fill input[name="snat_1"]
-    page.fill("input[name=\"snat_1\"]", "9.9.9.0")
-
-    # Press Tab
-    page.press("input[name=\"snat_1\"]", "Tab")
-
-    # Fill input[name="snat_2"]
-    page.fill("input[name=\"snat_2\"]", "255.255.255.0")
-
-    # Press Tab
-    page.press("input[name=\"snat_2\"]", "Tab")
-
-    # Fill input[name="snat_3"]
-    page.fill("input[name=\"snat_3\"]", "192.168.88.237")
-
-    # Select GE3
-    page.selectOption("select[id=\"dst_if\"]", "GE3")
-
-    # Click tr[id="datagrid-row-r1-2-0"] >> text="添加"
-    page.click("tr[id=\"datagrid-row-r1-2-0\"] >> text=\"添加\"")
 
     # Close page
     page.close()
